@@ -11,6 +11,7 @@ class CocktailsController < ApplicationController
     @cocktail = Cocktail.new
   end
 
+
   def create
 
     @cocktail = Cocktail.new(params_cocktail)
@@ -27,9 +28,14 @@ class CocktailsController < ApplicationController
     redirect_to cocktails_path
   end
 
+  def search
+    # @cocktails = Cocktail.find(params["search"]["query"])
+    @cocktail = Cocktail.find_by name: params['search']['query']
+  end
+
   private
 
   def params_cocktail
-    params['cocktail'].permit(:name)
+    params['cocktail'].permit(:name, :photo)
   end
 end
